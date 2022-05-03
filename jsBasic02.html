@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>jsBasic02</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  head>
+<body>
+    <div>
+        <button type="button" onclick="funcB1()">Try it</button>
+        <p id="Result01"></p>
+        <button onclick="funcB2()">Try It 2  </button>
+    </div>
+
+  <script>
+        function funcB1() 
+        {
+          const person = {
+          firstName: "John",
+          lastName : "Doe",
+          id       : 5566,
+          fullName : function() {
+            return this.firstName + " " + this.lastName;
+                    }
+          };
+
+/* string escape 문자 
+1.Six other escape sequences are valid in JavaScript:
+Code	Result
+\b	Backspace
+\f	Form Feed
+\n	New Line
+\r	Carriage Return
+\t	Horizontal Tabulator
+\v	Vertical Tabulator
+
+2.The backslash (\) escape character turns special characters into string characters:
+Code	        Result	Description
+\'	          '	      Single quote
+\"	          "	      Double quote
+\\	          \	      Backslash
+
+here are 3 methods for extracting a part of a string:
+
+slice(start, end)
+substring(start, end)
+substr(start, length)
+
+*/
+
+          console.log("\"" + person.fullName() + "\t\\\'"); 
+/* 주의 다음 함수는 조심해서 확인해보자. 
+here are 3 methods for extracting a part of a string:
+slice(start, end) // 시작과 끝 인댁스 (index) 이다. 0부터 시작  
+substring(start, end)  // 시작과 끝 인댁스 (index) 이다. 0부터 시작 
+substr(start, length) // 시작과 "길이" 이다. 0부터 시작.
+*/ 
+          var stringVar = "hangul" ; 
+          console.log("slice(1,2):" ,stringVar.slice(1,2));
+          console.log("substring(1,2):", stringVar.substring(1,2)) ;
+          console.log("substr(1,2):",stringVar.substr(1,2)); 
+          // 보다시피 substring과substr 는 동일한 기능이 아니다.
+          var stringVar = "한글입니다." ;  // ※ !!한글도 동일하게 한글자로 취급한다.!! 
+          console.log("slice(1,2):" ,stringVar.slice(1,2));
+          console.log("substring(1,2):", stringVar.substring(1,2)) ;
+          console.log("substr(1,2):",stringVar.substr(1,2)); 
+
+          let text = "Please visit Microsoft and Microsoft!";
+          let newText = text.replace("Microsoft", "W3Schools");
+          console.log("newText:",newText) ;
+        }
+        function  funcB2 () 
+        {
+
+        }
+  </script>
+</body>
+</html>
