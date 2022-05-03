@@ -1,78 +1,218 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>jsBasic02</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      jsBasic02 Object,function,string(meathod),Interpolation [`${보간}`],Number
+      part1
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
     <div>
-        <button type="button" onclick="funcB1()">Try it</button>
-        <p id="Result01"></p>
-        <button onclick="funcB2()">Try It 2  </button>
+      <button type="button" onclick="funcB1()">Try it</button>
+      <p id="Result01"></p>
+      <button onclick="funcB2()">Try It 2</button>
     </div>
 
-  <script>
-        function funcB1() 
-        {
-          const person = {
+    <script>
+      function funcB1() {
+        const person = {
           firstName: "John",
-          lastName : "Doe",
-          id       : 5566,
-          fullName : function() {
+          lastName: "Doe",
+          id: 5566,
+          fullName: function () {
             return this.firstName + " " + this.lastName;
-                    }
-          };
+          }
+        };
+        /* string escape 문자
+      1.Six other escape sequences are valid in JavaScript:
+      Code	Result
+      \b	Backspace
+      \f	Form Feed
+      \n	New Line
+      \r	Carriage Return
+      \t	Horizontal Tabulator
+      \v	Vertical Tabulator
 
-/* string escape 문자 
-1.Six other escape sequences are valid in JavaScript:
-Code	Result
-\b	Backspace
-\f	Form Feed
-\n	New Line
-\r	Carriage Return
-\t	Horizontal Tabulator
-\v	Vertical Tabulator
+      2.The backslash (\) escape character turns special characters into string characters:
+      Code	        Result	Description
+      \'	          '	      Single quote
+      \"	          "	      Double quote
+      \\	          \	      Backslash
 
-2.The backslash (\) escape character turns special characters into string characters:
-Code	        Result	Description
-\'	          '	      Single quote
-\"	          "	      Double quote
-\\	          \	      Backslash
+      here are 3 methods for extracting a part of a string:
 
-here are 3 methods for extracting a part of a string:
+      slice(start, end)
+      substring(start, end)
+      substr(start, length)
 
-slice(start, end)
-substring(start, end)
-substr(start, length)
+      */
+        console.log('"' + person.fullName() + "\t\\'");
+        /* 주의 다음 함수는 조심해서 확인해보자.
+      here are 3 methods for extracting a part of a string:
+      slice(start, end) // 시작과 끝 인댁스 (index) 이다. 0부터 시작
+      substring(start, end)  // 시작과 끝 인댁스 (index) 이다. 0부터 시작
+      substr(start, length) // 시작과 "길이" 이다. 0부터 시작.
+      */
 
+        var stringVar = "hangul";
+
+        console.log("slice(1,2):", stringVar.slice(1, 2)); //slice(1,2): a
+        console.log("substring(1,2):", stringVar.substring(1, 2)); //substring(1,2): a
+        console.log("substr(1,2):", stringVar.substr(1, 2)); //substr(1,2): an
+        // 보다시피 substring과substr 는 동일한 기능이 아니다.
+        var stringVar = "한글입니다."; // ※ !!한글도 동일하게 한글자로 취급한다.!!
+        console.log("slice(1,2):", stringVar.slice(1, 2)); //slice(1,2): 글
+        console.log("substring(1,2):", stringVar.substring(1, 2)); //substring(1,2): 글
+        console.log("substr(1,2):", stringVar.substr(1, 2)); //substr(1,2): 글입
+
+        let text1 = "Please visit Microsoft and Microsoft!";
+        // 처음에 매치된것만 대치 된다.
+        let newText1 = text1.replace("Microsoft", "W3Schools");
+        console.log("newText:", newText1);
+        // 결과 값
+        //newText: Please visit W3Schools and Microsoft!
+        // To replace case insensitive, use a regular expression with an /i flag (insensitive):
+        // let을 쓸때 주의 하자!!!
+        let text2 = "Please visit Microsoft!";
+        let newText2 = text2.replace(/MICROSOFT/i, "W3Schools");
+        console.log("newText2:", newText2);
+      }
+
+      function funcB2() {
+        /*
+          JavaScript Search Methods
+            String indexOf()
+            String lastIndexOf()
+            String startsWith()
+            String endsWith()
+          */
+        let str = "Please locate where 'locate' occurs!";
+        console.log(str.indexOf("locate"));
+        console.log(str.lastIndexOf("locate"));
+        //string.startsWith(searchvalue, start)
+        console.log(str.startsWith("Please"));
+        console.log(str.indexOf("locate", 15));
+        console.log(str.endsWith("!") === "true");
+        //JavaScript String search()
+        str = "Please locate where 'locate' occurs!";
+        console.log(str.search("locate"));
+
+        // 주의점 https://www.w3schools.com/js/js_string_search.asp
+        //The search() method cannot take a second start position argument.
+        //The indexOf() method cannot take powerful search values (regular expressions).
+
+        text = "The rain in SPAIN stays mainly in the plain";
+        // The match() method searches a string for a match against a regular expression,
+        // and returns the matches, as an Array object.
+        //※string.match(regexp)
+        //※regexp	Required. The value to search for, as a regular expression.
+        //※Returns:	An Array, containing the matches, one item for each match, or null if no match is found
+        document.getElementById("Result01").innerHTML = text.match(/ain/g); //Exponentiation (ES2016)
+        console.log(text.match(/ain/g));
+        /* 결과값 
+        (3) ["ain", "ain", "ain"]
+            0: "ain"
+            1: "ain"
+            2: "ain"
+        */
+
+        /* 
+          string.includes(searchvalue, start)
+            searchvalue	Required. The string to search for
+            start	Optional. Default 0. Position to start the search
+            Returns:	Returns true if the string contains the value, otherwise false
+          JS Version:	ES6 (2015)
+        */
+        text = "Hello world, welcome to the universe.";
+        console.log(text.includes("world"));
+        console.log(text.includes("world", 12));
+
+        /*
+        Synonyms:
+                Template Literals
+                Template Strings
+                String Templates
+                Back-Tics Syntax
+        */
+
+        // 다중 라인 설정 할때 ,
+        let textMulti = `The quick
+            brown fox
+            jumps over
+            the lazy dog`;
+        //Interpolation 보간 / 내삽(內揷,interpolation)
+        //보간법(補間法)또는 내삽(內揷,interpolation)은 해석학에서 어떤 그래프 등의 자료에서 나와있는 부분의 사이에 있는 값을 평균하여 추정하는 것이다
+        //Template literals provide an easy way to interpolate variables and expressions into strings.
+        //The method is called string interpolation.
+        //The syntax is:
+        //${...}
+        // 중요: '`' [1옆에 있는 기호]를 사용함을 주의 하라.
+        let favoriteCity = "Seoul";
+        console.log(`My favorite city is ${favoriteCity}.`); //print Seoul
+        favoriteCity = "New York";
+        console.log(`My favorite city is ${favoriteCity}.`); //print New York
+
+        let firstName3 = "John";
+        let lastName3 = "Doe";
+
+        let text3 = `Welcome ${firstName3}, ${lastName3}!`;
+        console.log(text3);
+
+        /*!!JavaScript Numbers are Always 64-bit Floating Point!!
+JavaScript Numbers are Always 64-bit Floating Point
+- Unlike many other programming languages, JavaScript does not define different types of numbers, like integers, short, long, floating-point etc.
+- JavaScript numbers are always stored as double precision floating point numbers, following the international IEEE 754 standard.
+- This format stores numbers in 64 bits, where the number (the fraction) is stored in bits 0 to 51, the exponent in bits 52 to 62, and the sign in bit 63:
+Value (aka Fraction/Mantissa)	Exponent	        Sign
+52 bits (0 - 51) 	            11 bits (52 - 62)	1 bit (63)
+!자바스크립드는 숫자형식은 Number 하나이며 , 64-bit double precision *floating point numbers* 이다 !
+  실제 정수 계산 가능범위는 (2 ^ 53 - 1) ~ -(2 ^ 53 - 1) 라고 한다.
+  이는 Number의 MAX_SAFE_INTEGER 와 MIN_SAFE_INTEGER 값의 범위이다.
+  Number.MAX_SAFE_INTEGER ~ Number.MIN_SAFE_INTEGER
+    = 9007199254740991 ~ -9007199254740991
+    = (2^53 - 1) ~ -(2^53 - 1)
 */
+        let price4 = 10;
+        let VAT4 = 0.25;
 
-          console.log("\"" + person.fullName() + "\t\\\'"); 
-/* 주의 다음 함수는 조심해서 확인해보자. 
-here are 3 methods for extracting a part of a string:
-slice(start, end) // 시작과 끝 인댁스 (index) 이다. 0부터 시작  
-substring(start, end)  // 시작과 끝 인댁스 (index) 이다. 0부터 시작 
-substr(start, length) // 시작과 "길이" 이다. 0부터 시작.
-*/ 
-          var stringVar = "hangul" ; 
-          console.log("slice(1,2):" ,stringVar.slice(1,2));
-          console.log("substring(1,2):", stringVar.substring(1,2)) ;
-          console.log("substr(1,2):",stringVar.substr(1,2)); 
-          // 보다시피 substring과substr 는 동일한 기능이 아니다.
-          var stringVar = "한글입니다." ;  // ※ !!한글도 동일하게 한글자로 취급한다.!! 
-          console.log("slice(1,2):" ,stringVar.slice(1,2));
-          console.log("substring(1,2):", stringVar.substring(1,2)) ;
-          console.log("substr(1,2):",stringVar.substr(1,2)); 
+        let total4 = `Total: ${(price4 * (1 + VAT4)).toFixed(2)}`;
+        console.log(total4);
+        let string4 = `hi ${firstName3} ${lastName3} . Do you Like \"${favoriteCity}\" city ? `;
+        console.log(string4);
 
-          let text = "Please visit Microsoft and Microsoft!";
-          let newText = text.replace("Microsoft", "W3Schools");
-          console.log("newText:",newText) ;
-        }
-        function  funcB2 () 
-        {
+        //Javascript 소수점 올림, 버림, 반올림 함수 정리
+        //https://travelpark.tistory.com/69
+        /*
+        1. Math 객체 메서드
+          - Math.ceil() : 올림
+          - Math.floor() : 버림
+          - Math.round() : 반올림
+          .toFixed() 함수
+위에서 사용한 Math 객체 메서드의 경우 값이 정수로만 표현된다는 단점이 있습니다. 만약 원하는 소수점 자리 수까지 나타내주기 위해서는 .toFixed() 함수를 사용해야 합니다.
+간단한 예제를 통해서 .toFixed() 함수의 기능을 확인해보겠습니다.
 
-        }
-  </script>
-</body>
+    var n = 98.56321;
+    var m = -98.56321;
+    
+    n.toFixed(0); //99
+    n.toFixed(1); //98.6
+    n.toFixed(2); //98.56
+    n.toFixed(3); //98.563
+    n.toFixed(5); //98.56321
+    n.toFixed(10); //98.5632100000
+
+    m.toFixed(0); //-99
+    m.toFixed(1); //-98.6
+    m.toFixed(2); //-98.56
+    m.toFixed(3); //-98.563
+    m.toFixed(5); //-98.56321
+    m.toFixed(10); //-98.5632100000
+
+출처: https://travelpark.tistory.com/69 [Bon Voyage!]
+        */
+      }
+    </script>
+  </body>
 </html>
