@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>prototype</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <p id="Result01"></p>
+
+    <script>
+      // 자바스크립트 모든 것? 에 prototype 이 있고 ,
+      // 이 경우에는  사용자 정의 class / function / Object의 prototype 을 정의 하고 override 하여 사용 하는 형태를 만든다.
+      //
+      /* Class Person. */
+      function Person(name) {
+        this.name = name;
+      }
+      Person.prototype.getName = function () {
+        return this.name;
+      };
+
+      var reader = new Person("John Smith");
+      reader.getName = function () {
+        // call to base function of Person, is it possible?
+        return "Hello reader";
+      };
+      document.getElementById("Result01").innerHTML = reader.getName();
+    </script>
+  </body>
+</html>

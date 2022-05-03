@@ -134,6 +134,10 @@
           // yield 과 iterator.next() 가 있다 . 잘사용하지 않지만 참조해 볼만 하다 .
           //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/yield
           /*
+
+===== 복잡한 그리드 설정 1=============    
+import { jqx } from 'jqwidgets-scripts/jqwidgets-react-tsx/jqxgrid';
+      
     e3.grid.setColumn({ text: '확인여부', datafield: 'READ_YN', width: 60, align: 'center', cellsalign: 'center',
       cellsrenderer: (row, column, value) => {
         if (value === '1') return '<div class="jqx-grid-cell-middle-align div-circle-container"><div class="div-circle bgred"></div></div>';
@@ -144,8 +148,7 @@
         else return '<div></div>'
       },
     }),
-
-    ======================
+========복잡한 그리드 설정 2 ==============
               e3.grid.setColumn({ text: '제출상태', datafield: 'FILE_APPR_YN', width: 150, align: 'center', cellsalign: 'center',                
       columntype: 'combobox',
       editable: true,
@@ -176,6 +179,87 @@
         gridcombodata.find(item => item.LABEL === newvalue);        
       },
     }),
+=========================================
+--=------[콘트롤 사양정의 ]-----------
+
+    콘트롤 을 만들고 
+    그뒤에 사양 정의를 해준다 .
+
+import React from 'react';
+import { Button } from '@material-ui/core';
+import PropTypes from 'prop-types';    
+...
+class UserControls extends React.Component {
+  constructor(props) {
+    super(props);
+  ....}
+
+   this.enable = this.enable.bind(this);
+   .....
+    this.state = {
+      textLabel: props.textLabel,
+      disabled: props.disabled,
+      value: props.value,
+    };
+  }
+
+  enable() {
+    if (this.state.disabled) {
+      this.setState({
+        disabled: false,
+      });
+    }
+  }
+.... 
+    onClick = (e) => {
+    if (this.props.onClick !== null) {
+      this.props.onClick(e);
+    }
+  }
+
+  render() {
+    const { textLabel, ...others } = this.props;
+    return (
+      <>
+        <Button
+          {...others}
+          disabled={this.state.disabled}
+          value={this.state.value}
+          onClick={this.onClick}
+        >
+          {this.state.textLabel ? this.state.textLabel : this.props.children ? this.props.children : 'button' }
+        </Button>
+      </>
+    );
+  }
+
+UserControls.propTypes = {
+  textLabel: PropTypes.string,
+  color: PropTypes.string,
+  component: PropTypes.string,
+  disabled: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  href: PropTypes.string,
+  size: PropTypes.string,
+  variant: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onClick: PropTypes.func,
+};
+
+Controls.defaultProps = {
+  color: 'default',
+  component: 'button',
+  disabled: false,
+  fullWidth: false,
+  href: '',
+  size: 'medium',
+  variant: 'contained',
+  value: '',
+  onClick: null,
+};
+
+-------------------------------
+
 
           yield
 yield 키워드는 제너레이터 함수 (function* 또는  레거시 generator 함수)를 중지하거나 재개하는데 사용됩니다.

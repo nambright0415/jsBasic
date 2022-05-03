@@ -1,21 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="kr">
   <head>
     <meta charset="utf-8" />
-    <title>Page Title</title>
+    <title>Javascript Number</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
     <button type="button" onclick="funcC1()">Try it</button>
     <p id="Result01"></p>
     <button onclick="funcC2()">Try It 2</button>
-
+    <p id="Result02"></p>
     <script>
       function funcC1() {
-        document.getElementById("Result01").innerHTML = "hi~";
+        let x = 500;
+        // y is an object
+        let y = new Number(500);
+        console.log("x==y : ", x == y);
+        console.log("x===y : ", x === y);
+        let text1 = ` let x = 500;  <br/>let y = new Number(500); <br/>  x===y => ${
+          x === y
+        } <br/> x==y  => ${x == y} `;
+        document.getElementById("Result01").innerHTML = text1;
+
+        let x2 = 5;
+        let y2 = 5;
+
+        console.log("x2==y2 : ", x2 == y2);
+        console.log("x2===y2 : ", x2 === y2);
+
+        let x3 = new Number(500);
+        // y is an object
+        let y3 = new Number(500);
+
+        console.log("[Number Class간 비교] x3 === y3 : ", x3 === y3);
+        console.log("[Number Class간 비교] x3 == y3 : ", x3 == y3);
       }
+
       function funcC2() {
-        document.getElementById("Result01").innerHTML = "bye~";
+        let x = 123;
+        x.toString();
+        (123).toString();
+        (100 + 23).toString();
+        x = 9.656;
+        //toFixed() returns a string, with the number written with a specified number of decimals:
+        // 소숫점 뒷자리수
+        x.toFixed(0);
+        console.log("x.toFixed(2):", x.toFixed(2));
+        x.toFixed(4);
+        x.toFixed(6);
+        //toPrecision() returns a string, with a number written with a specified length:
+        // 전체(특정)길이
+        x.toPrecision();
+        console.log("x.toPrecision(2):", x.toPrecision(2));
+        console.log("x.toPrecision(3):", x.toPrecision(3));
+        x.toPrecision(4);
+        x.toPrecision(6);
+
+        x = 123;
+        //valueOf() returns a number as a number.
+        console.log("x.valueOf():", x.valueOf());
+        console.log("(123).valueOf():", (123).valueOf());
+        console.log("(100 + 23).valueOf() : ", (100 + 23).valueOf());
+
+        x = "123 ";
+
+        console.log("x.valueOf():", typeof x.valueOf());
+
+        document.getElementById("Result02").innerHTML = "bye~";
       }
     </script>
   </body>
