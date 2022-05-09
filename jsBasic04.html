@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Javascript Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <button type="button" onclick="funcC1()">Try it</button>
+    <p id="Result01"></p>
+    <button onclick="funcC2()">Try It 2</button>
+    <p id="Result02"></p>
+    <script>
+      function leadingZeros(n, digits) {
+        var zero = "";
+        n = n.toString();
+
+        if (n.length < digits) {
+          for (var i = 0; i < digits - n.length; i++) zero += "0";
+        }
+        return zero + n;
+      }
+
+      function funcC1() {
+        var arr = [];
+        for (i = 1; i < 10; i++) {
+          arr.push({ id: leadingZeros(i, 2), CNT: i });
+        }
+        //arr.forEach((item) => console.log(item.id, ":", item.CNT));
+        let dest = arr.map((item, index) => {
+          return { id: item.id, cnt: item.CNT * 2, idx: index };
+        });
+        console.log(dest);
+        dest.forEach((item, idx) => {
+          console.log("idx:", item.idx, "Id:", item.id, "cnt", item.cnt);
+        });
+
+        document.getElementById("Result01").innerHTML = "hi";
+      }
+
+      function funcC2() {
+        document.getElementById("Result02").innerHTML = "bye~";
+      }
+    </script>
+  </body>
+</html>
